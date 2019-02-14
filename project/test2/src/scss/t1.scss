@@ -1,0 +1,32 @@
+$headH: 50px;
+$ctnH: 400px;
+$footH: 30px;
+$full: 100%;
+
+.header{
+  width: $full;
+  height: $headH;
+  background: rgba(0,125,125,1);
+}
+.content{
+  width: $full;
+  height: $ctnH;
+  .left-part{
+    width: 50%;
+    height: $full;
+    float: left;
+    background-color: rgba(250,125,0,1);
+  }
+  .right-part{
+    width: 50%;
+    height: $full;
+    float: right;
+    background-color: rgba(125,125,125,1);
+  }
+}
+.footer{
+  width: $full;
+  height: $footH;
+  background-color: rgba(1,123,1,1);
+  transform: translateY(20px);
+}
