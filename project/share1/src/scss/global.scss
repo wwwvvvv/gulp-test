@@ -1,0 +1,47 @@
+html,body{
+  height: 100%;
+  position: relative;
+}
+.btn-group{
+  overflow: hidden;
+  padding-top: 150px;
+}
+.mov-box{
+  width: 120px;
+  height: 120px;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+.mar-transition{
+  background: #fa7d00;
+  transition: margin-left 2s linear;
+}
+.tran-transition{
+  background: yellowgreen;
+  transition: transform 2s linear;
+}
+
+//.mov-box.mar-mov{
+//  animation: marMov 2s linear 200ms 1 forwards;
+//}
+//@keyframes marMov {
+//  0% {
+//    margin-left: 0;
+//  }
+//  100% {
+//    margin-left: 200px;
+//  }
+//}
+//.mov-box.tran-mov{
+//  animation: tranMov 2s linear 200ms 1 forwards;
+//}
+//
+//@keyframes tranMov {
+//  0%{
+//    transform: translateX(0);
+//  }
+//  100%{
+//    transform: translateX(200px);
+//  }
+//}

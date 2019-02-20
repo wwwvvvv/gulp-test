@@ -10,7 +10,9 @@ var imagemin = require('gulp-imagemin');//压缩图片
 var pngquant = require('imagemin-pngquant');//深度压缩图片
 var concat = require("gulp-concat");//文件合并
 var autoprefixer = require("gulp-autoprefixer"); //根据设置浏览器版本自动处理浏览器前缀
+var browserify = require('gulp-browserify'); //js模块合并
 var argv = require('yargs').argv;
+var clean = require('gulp-clean');
 
 //其他变量
 var app = 'project/' + argv.app;
@@ -67,15 +69,35 @@ gulp.task('dealCss', function () {
         .pipe(browserSync.stream());
 });
 
+gulp.task('scripts', function () {
+   return gulp.src(app + '/src/javascript/main.js')
+       // .pipe(browserify({
+       //     insertGlobals : true,
+       //     debug : true
+       // }))
+       .pipe(rename({
+           basename: 'bundle'
+       }))
+       .pipe(gulp.dest(app + '/dist/javascript'))
+});
+
+gulp.task('copy-js', function (done) {
+    return gulp.src([app + '/src/javascript/**/*.js','!' + app + '/src/javascript/main.js'])
+        .pipe(gulp.dest(app + '/dist/javascript'));
+});
+
 gulp.task("watch", function () {
     gulp.watch(app + '/src/*.html').on("change",gulp.series('htmlMin'));
     gulp.watch(app + '/src/scss/*.scss').on("change",gulp.series('dealCss'));
+    gulp.watch(app + '/src/javascript/main.js').on("change",gulp.series('scripts'));
+    gulp.watch([app + '/src/javascript/**/*.js','!'+app + '/src/javascript/main.js']).on("change",gulp.series('copy-js'));
     gulp.watch(app + '/dist/*.html').on("change", browserSync.reload);
+    gulp.watch(app + '/dist/javascript/**/*.js').on("change", browserSync.reload);
     // gulp.watch(app + '/dist/css/*.css').on("change", browserSync.reload);
 
 });
 
-gulp.task('start', gulp.series(gulp.parallel('dealCss', 'htmlMin'), 'serve', 'watch'), function (done) {
+gulp.task('start', gulp.series(gulp.parallel('dealCss', 'htmlMin', 'scripts', 'copy-js'), 'serve', 'watch'), function (done) {
     console.log("default task done!");
 });
 
