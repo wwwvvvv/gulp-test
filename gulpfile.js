@@ -7,12 +7,14 @@ var rename = require('gulp-rename');  //重命名
 var cleanCss = require('gulp-clean-css');//压缩CSS
 var htmlMin = require('gulp-htmlmin'); //压缩html
 var imagemin = require('gulp-imagemin');//压缩图片
-var pngquant = require('imagemin-pngquant');//深度压缩图片
+// var pngquant = require('imagemin-pngquant');//深度压缩图片
 var concat = require("gulp-concat");//文件合并
 var autoprefixer = require("gulp-autoprefixer"); //根据设置浏览器版本自动处理浏览器前缀
-var browserify = require('gulp-browserify'); //js模块合并
+var browserify = require('gulp-browserify'); //js模块合并 --- CommonJS
+var babelify    = require('babelify');
 var argv = require('yargs').argv;
 var clean = require('gulp-clean');
+
 
 //其他变量
 var app = 'project/' + argv.app;
@@ -71,10 +73,15 @@ gulp.task('dealCss', function () {
 
 gulp.task('scripts', function () {
    return gulp.src(app + '/src/javascript/main.js')
-       // .pipe(browserify({
-       //     insertGlobals : true,
-       //     debug : true
-       // }))
+       .pipe(browserify({
+           transform: [babelify.configure({
+               // browserify默认不会bable处理node_modules http://npm.taobao.org/package/babelify
+               ignore: /hammer|iscroll/,
+               sourceMaps: false
+           })],
+           insertGlobals : true,
+           debug : true
+       }))
        .pipe(rename({
            basename: 'bundle'
        }))
@@ -97,10 +104,13 @@ gulp.task("watch", function () {
 
 });
 
-gulp.task('start', gulp.series(gulp.parallel('dealCss', 'htmlMin', 'scripts', 'copy-js'), 'serve', 'watch'), function (done) {
+// gulp.task('start', gulp.series(gulp.parallel('dealCss', 'htmlMin', 'scripts', 'copy-js'), 'serve', 'watch'), function (done) {
+//     console.log("default task done!");
+// });
+
+gulp.task('start', gulp.series(gulp.parallel('dealCss', 'htmlMin', 'scripts'), 'serve', 'watch'), function (done) {
     console.log("default task done!");
 });
-
 
 //download-page  tasks
 gulp.task('serve2', function (done) {
