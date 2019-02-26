@@ -1,5 +1,7 @@
 html,body{
   height: 100%;
+  margin: 0;
+  background: rgba(0,200,0,0.1);
   position: relative;
 }
 .btn-group{
@@ -22,6 +24,13 @@ html,body{
   transition: transform 2s linear;
 }
 
+#start{
+  width: 100px;
+  height: 30px;
+  position: absolute;
+  top: 50%;
+  left: 30%;
+}
 //.mov-box.mar-mov{
 //  animation: marMov 2s linear 200ms 1 forwards;
 //}
