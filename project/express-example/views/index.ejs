@@ -1,0 +1,15 @@
+<% include header %>
+<h1>express 留言板</h1>
+<a href="/new-entry">写一个留言</a>
+<%if (entries.length) {%>
+    <ul>
+        <% entries.forEach(function (value) { %>
+            <li>
+                <%=value.publishDate%>：<%=value.tit%> & <%=value.ctn%>
+            </li>
+        <% })%>
+    </ul>
+<%} else {%>
+    暂无留言
+<% }%>
+<% include footer%>

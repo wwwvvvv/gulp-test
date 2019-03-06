@@ -108,6 +108,7 @@ gulp.task("watch", function () {
 //     console.log("default task done!");
 // });
 
+
 gulp.task('start', gulp.series(gulp.parallel('dealCss', 'htmlMin', 'scripts'), 'serve', 'watch'), function (done) {
     console.log("default task done!");
 });
