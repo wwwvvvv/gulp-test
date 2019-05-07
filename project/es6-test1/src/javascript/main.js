@@ -11,3 +11,8 @@
 // alert(num);
 // var res1 = m2.addVal(1,2);
 // alert(res1);
+
+// setTimeout(function () {
+//     document.getElementsByClassName('matrix')[0].classList.add('mov');
+//     console.log("add");
+// }, 3000);

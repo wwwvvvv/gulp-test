@@ -552,20 +552,206 @@
 //     .then(result => console.log(result))
 //     .catch(err => console.log(err));
 
+const fs = require('fs');
+
+const readFile = function (filename) {
+    return new Promise(function (resolve, reject) {
+        fs.readFile(filename, function (err, data) {
+           if (err) {
+               return reject(err);
+           }
+           resolve(data);
+            console.log(data);
+        });
+    });
+};
+
+// const gen = function* () {
+//   const f1 = yield readFile('./../file/t1.txt');
+//   const f2 = yield readFile('./../file/t2.txt');
+//
+//   console.log(f1);
+//   console.log(f2);
+// };
+
+// var g = gen();
+// g.next();
+// g.next();
+// g.next();
+
+// function timeout(ms) {
+//     return new Promise((resolve, reject) => {
+//         setTimeout(resolve,ms);
+//     });
+// }
+//
+// async function asyncPrint(value, ms) {
+//     await timeout(ms);
+//     console.log(value);
+// }
+
+// async function timeout(ms) {
+//     await new Promise((resolve, reject) => {
+//        setTimeout(resolve, ms);
+//     });
+// }
+//
+// async function asyncPrint(value, ms) {
+//     await timeout(1000);
+//     console.log(value);
+// }
+
+// asyncPrint('hello world', 1000);
+
+// class Sleep{
+//     constructor(timeout) {
+//         this.timeout = timeout;
+//     }
+//     then(resolve, reject) {
+//         const startTime = Date.now();
+//         setTimeout(() => resolve(Date.now() - startTime), this.timeout);
+//     }
+// }
+//
+// (async () => {
+//     const actualTime = await new Sleep(1000);
+//     console.log(actualTime);
+// })();
+
+// async function f() {
+//     await Promise.reject('error');
+// }
+//
+// f().then(v => console.log(v))
+//     .catch(e => console.log(e));
+
+// function f1() {
+//     return new Promise((resolve, reject) => {
+//        setTimeout(function () {
+//            resolve('f1');
+//        }, 2000);
+//     });
+// }
+// f1().then(value => {
+//     console.log(value);
+// }).catch(e => {
+//     console.log(e);
+// });
+
+// async function f1() {
+//     console.log("aaa");
+//     return 'hello'
+// }
+//
+// var f = f1().then(value => {
+//     console.log(value);
+// });
+// console.log(f);
 
 
+// listen('click', function (e) {
+//     setTimeout(function () {
+//         ajax('url', function (txt) {
+//            if (txt === 'hello') {
+//                doSth();
+//            } else if(txt === '') {
+//                doSthElse();
+//            }
+//         });
+//     }, 500);
+// });
 
+// function fetchX() {
+//     return new Promise((resolve, reject) => {
+//        setTimeout(function () {
+//            console.log(10);
+//            resolve(10);
+//        }, 1000);
+//     });
+// }
+//
+// function fetchY() {
+//     return new Promise(((resolve, reject) => {
+//         setTimeout(function () {
+//             console.log(20);
+//             resolve(20);
+//         }, 4000);
+//     }));
+// }
+//
+// function sum() {
+//     return Promise.all([fetchX(), fetchY()]).then(value => {
+//         console.log(value);
+//         return value[0] + value[1];
+//     });
+// }
+//
+// sum().then(sum => {
+//     console.log(sum);
+// }).then(value => {
+//     console.log(value);
+// });
+//
+// function getNumber1() {
+//     return Promise.resolve(374);
+// }
+//
+// async function getNumber2() {
+//     return 374;
+// }
+//
+// console.log(getNumber1().then(value => {
+//     console.log(value);
+// }));
+// console.log(getNumber2().then(value => {
+//     console.log(value);
+// }));
 
+// script start
+// async1 start
+// async2
+// promise1
+//script end
+// promise2
+// async1 end
+// setTimeout
 
+// function sleep(wait) {
+//     return new Promise((resolve, reject) => {
+//        setTimeout(() => {
+//            resolve(wait);
+//        }, wait);
+//     });
+// }
+//
+// sleep(1000).then(res => {
+//     return sleep(res + 500);
+// }).then(res => {
+//     return sleep(res + 500);
+// }).then(res => {
+//     console.log(res);
+// });
+// console.time();
+// function sleep(wait) {
+//     return new Promise((resolve, reject) => {
+//         setTimeout(function () {
+//             console.log(wait);
+//             resolve(200);
+//         },1000)
+//     });
+// }
+//
+// Promise.all([sleep(500), sleep(1000)]).then(value => {
+//     console.log(value);
+//     console.timeEnd();
+// });
 
-
-
-
-
-
-
-
-
-
-
+// var pattern = /^runoob/i;
+// console.log(pattern.test('runoob111'));
+var str = 'visit11 runoob';
+var reg = /^((\d{2})|(\w{2}))/i;
+// var n = str.exec(/\d/i);
+// console.log(n);
+var n = reg.test(str);
+console.log(n);
 
